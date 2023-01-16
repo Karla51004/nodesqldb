@@ -1,66 +1,66 @@
 const db = require("../helpers/db");
 
-exports.getAllUsers = (req, res) => {
-  db.query("SELECT * FROM users;", (err, result, fields) => {
+exports.getAllBooks = (req, res) => {
+  db.query("SELECT * FROM books;", (err, result, fields) => {
     if (err) return console.log(err);
     res.status(200).send({
-      msg: "Users found",
+      msg: "Books found",
       result,
     });
   });
 };
 
-exports.getUserById = (req, res) => {
+exports.getBookById = (req, res) => {
   db.query(
-    "SELECT * FROM users WHERE id = ?;",
+    "SELECT * FROM books WHERE id = ?;",
     [req.params.id],
     (err, result, fields) => {
       if (err) return console.log(err);
       res.status(200).send({
-        msg: "User found",
+        msg: "Book found",
         result,
       });
     }
   );
 };
 
-exports.postUser = (req, res) => {
+exports.postBook = (req, res) => {
   db.query(
-    "INSERT INTO users (name, age, image) VALUES (?, ?, ?);",
+    "INSERT INTO books (name, age, image) VALUES (?, ?, ?);",
     [req.body.name, req.body.age, req.body.image],
     (err, result, fields) => {
       if (err) return console.log(err);
       res.status(200).send({
-        msg: "User created",
+        msg: "Books created",
         result,
       });
     }
   );
 };
 
-exports.putUser = (req, res) => {
+exports.putBook = (req, res) => {
   //regex
   db.query(
-    "UPDATE users SET name = ?, age = ?, image = ? WHERE id = ?;",
+    "UPDATE books SET name = ?, age = ?, image = ? WHERE id = ?;",
     [req.body.name, req.body.age, req.body.image, req.params.id],
     (err, result, fields) => {
       if (err) return console.log(err);
       res.status(200).send({
-        msg: "User updated",
+        msg: "Book updated",
         result,
       });
     }
   );
 };
 
-exports.deleteUser = (req, res) => {
+exports.deleteBook = (req, res) => {
   db.query(
-    "DELETE FROM users WHERE id = ?;",
+    "DELETE FROM books WHERE id = ?;",
     [req.params.id],
     (err, result, fields) => {
       if (err) return console.log(err);
       res.status(200).send({
-        msg: "User deleted",
+        msg: "Book deleted",
         result,
       });
     }
